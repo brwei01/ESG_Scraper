@@ -2,15 +2,19 @@ import requests
 import os
 import json
 import re
+from datetime import datetime
 
 def download_files(url, output_dir, esg_pattern):
     response = requests.get(url)
     data = response.json()
 
     total_records = data['recordCnt']
+    # log total records
+    print(total_records)
 
     # Modify and update the URL
     # url = url.replace('rowRange=10', f'rowRange={total_records}')
+    # replace the line below with above
     url = url.replace('rowRange=10', 'rowRange=1000')
     response = requests.get(url)
     data = response.json()
@@ -40,7 +44,13 @@ def download_files(url, output_dir, esg_pattern):
             print(f'{file_name} downloaded successfully.')
 
 
-url = 'https://www1.hkexnews.hk/search/titleSearchServlet.do?sortDir=0&sortByOptions=DateTime&category=0&market=SEHK&stockId=-1&documentType=-1&fromDate=20240612&toDate=20240712&title=&searchType=0&t1code=-2&t2Gcode=-2&t2code=-2&rowRange=10&lang=E'
+url1 = 'https://www1.hkexnews.hk/search/titleSearchServlet.do?sortDir=0&sortByOptions=DateTime&category=0&market=SEHK&stockId=-1&documentType=-1&fromDate='
+from_date = '20240612'
+to_date = '20240712'
+# to_date = datetime.today().strftime('%Y%m%d')
+
+url2 = '&title=&searchType=0&t1code=-2&t2Gcode=-2&t2code=-2&rowRange=10&lang=E'
+url = url1 + from_date + to_date + '&toDate=' + url2
 output_dir = 'D:/Dev/downloads'
 esg_pattern = re.compile(r'\b(ESG|environment|environmental)\b', re.IGNORECASE)
 download_files(url, output_dir, esg_pattern)
