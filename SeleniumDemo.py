@@ -63,7 +63,9 @@ try:
         showing_count_number = int(parts[1])
         total_count_number = int(parts[3])
 
-        while showing_count_number < total_count_number:
+        # while showing_count_number < total_count_number:
+        while showing_count_number < 500:
+            print(showing_count_number)
             try:
                 # Find the "LOAD MORE" button
                 load_btn = WebDriverWait(driver, 10).until(
@@ -102,6 +104,10 @@ try:
     except NoSuchElementException as e:
         print(f"An error occurred: {e}")
 
+    print("================")
+    print("loading finished")
+    print("================")
+
     # Find links to documents
     row_elements = driver.find_elements(By.CLASS_NAME, "doc-link")
     for row_element in row_elements:
@@ -113,7 +119,7 @@ try:
                 print(f"Found ESG related pdf doc: {href}!")
                 try:
                     WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.TAG_NAME, "a")))
-                    # link_element.click()
+                    link_element.click()
                     # time.sleep(1)
                 except NoSuchElementException:
                     print("Element click intercepted. try to dismiss modal or overlay")
