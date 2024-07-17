@@ -18,7 +18,7 @@ class DateSearch():
         to_date_obj = self.today_date - relativedelta(months=months_ago-1)
         to_date = to_date_obj.strftime('%Y%m%d')
         # Calculate the from_date as one month before the to_date
-        from_date_obj= self.to_date_obj - relativedelta(months=months_ago)
+        from_date_obj = to_date_obj - relativedelta(months=months_ago)
         from_date = from_date_obj.strftime('%Y%m%d')
 
         return from_date, to_date

@@ -1,4 +1,5 @@
 from JsonDemo import DateSearch, JsonRequestor
+import re
 
 def main():
     url_head = 'https://www1.hkexnews.hk/search/titleSearchServlet.do?sortDir=0' \
@@ -22,7 +23,8 @@ def main():
     # mac output_dir
     output_dir = '/Users/apple/Dev/downloads'
     esg_pattern = re.compile(r'\b(ESG|environment|environmental)\b', re.IGNORECASE)
-    download_files(url, output_dir, esg_pattern)
+    js_requestor = JsonRequestor()
+    js_requestor.download_files(url, output_dir, esg_pattern)
 
 if __name__ == "__main__":
     main()
