@@ -3,9 +3,8 @@ import os
 import json
 import re
 from datetime import datetime
-import DateSearch
-from datetime import datetime
 from dateutil.relativedelta import relativedelta
+
 
 class DateSearch():
     today_date = datetime.today()
@@ -61,12 +60,12 @@ class JsonRequestor():
                 file_path = os.path.join(output_dir, file_name)
 
                 print(f'Downloading {file_name}...')
-                '''
+
                 file_response = requests.get(file_link)
                 with open(file_path, 'wb') as file:
                     file.write(file_response.content)
                 print(f'{file_name} downloaded successfully.')
-                '''
+
 
 
 
